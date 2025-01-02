@@ -1,0 +1,112 @@
+.halima {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    background-color: #000;
+    border-radius: 20px;
+    padding: 20px; /* Ajouter un peu d'espace autour pour éviter que le contenu touche les bords */
+    width: 84%;
+    margin: auto;
+}
+
+.box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    animation: animate 20s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes animate {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+.box > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+}
+
+.box span img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Queries pour tablettes (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .box {
+        width: 50vw; /* Réduit la taille de la boîte sur les tablettes */
+        height: 50vw;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    /* Masquer les images excédentaires */
+    .box > span:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 780px) {
+    .box {
+        width: 50vw; /* Réduit la taille de la boîte sur les tablettes */
+        height: 50vw;
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+    /* Masquer les images excédentaires */
+    .box > span:nth-child(n+5) {
+        display: none;
+    }
+}
+
+/* Media Queries pour smartphones (max-width: 480px) */
+@media (max-width: 480px) {
+    .box {
+        width: 50vw; /* Garder la taille de la boîte raisonnable */
+        height: 50vw;
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    /* Masquer les images excédentaires */
+    .box > span:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .box {
+        width: 60vw; /* Ajuster encore la taille de la boîte sur les petits écrans */
+        height: 60vw;
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    /* Masquer les images excédentaires */
+    .box > span:nth-child(n+5) {
+        display: none;
+    }
+}
+.Hajjaj > h1{
+text-align: center;
+}

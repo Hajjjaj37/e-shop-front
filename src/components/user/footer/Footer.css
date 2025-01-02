@@ -1,0 +1,80 @@
+/* Style global pour le footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Conteneur du footer */
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  /* Style pour le logo et la description */
+  .footer-logo {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .footer-logo .logo {
+    max-width: 150px; /* Ajuster la taille du logo */
+    margin-bottom: 20px;
+  }
+  
+  .footer-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #bbb;
+    margin-top: 10px;
+  }
+  
+  /* Réseaux sociaux */
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .social-icon {
+    color: #fff;
+    font-size: 30px;
+    transition: color 0.3s, transform 0.3s;
+    text-decoration: none;
+  }
+  
+  .social-icon:hover {
+    color: #007bff; /* Couleur au survol */
+    transform: scale(1.2); /* Agrandit l'icône */
+  }
+  
+  /* Responsivité */
+  @media screen and (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .footer-socials {
+      margin-top: 20px;
+    }
+  
+    .footer-description {
+      text-align: center;
+    }
+  }
+  

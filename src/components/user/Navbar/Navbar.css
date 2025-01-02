@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/* Add these styles to your Navbar.css */
+.nav-link {
+    color: white !important;
+    /* Make the text white */
+    font-weight: bold;
+    /* Make the text bold */
+}
+
+.nav-link:hover {
+    color: #f8f9fa !important;
+    /* Slightly lighter color on hover */
+    text-decoration: underline;
+    /* Optional: Add underline on hover */
+}
+
+/* Optional: Add styles for the navbar-brand text */
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Adjust the background color for better visibility when scrolling */
+.header.sticky-top {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Slightly transparent black */
+    transition: background-color 0.3s ease;
+}
+
+.header.fixed-top {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Slightly transparent black */
+
+    transition: background-color 0.3s ease;
+}
+
+.header {
+    width: 100%;
+    top: 0px;
+    left: 0;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.header::before {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px);
+    left: 0;
+    position: absolute;
+    content: '';
+    width: 100%;
+    z-index: -1;
+}
+
+.logo {
+    width: 130px;
+    box-shadow: none;
+}
+
+.header.sticky-top .logo {
+    filter: invert(1);
+    box-shadow: none;
+    transition: filter 0.3s ease;
+}
+
+#checkbox {
+    display: none;
+}
+
+.navbar ul {
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+}
+
+.login ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 2.5rem;
+    cursor: pointer;
+}
+
+.login ul {
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+}
+
+.login ul li i {
+    color: #fff;
+}
+
+.login ul li a {
+    text-decoration: none;
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login ul li a:hover {
+    color: #d65106;
+}
+
+.navbar ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 2.5rem;
+    cursor: pointer;
+}
+
+.navbar ul li i {
+    color: #fff;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.navbar ul li a:hover {
+    text-decoration: none;
+    font-size: 1.15rem;
+    color: #d65106;
+    font-weight: 500;
+}
+
+.icons {
+    font-size: 2.2rem;
+    color: #fff;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    display: none;
+}

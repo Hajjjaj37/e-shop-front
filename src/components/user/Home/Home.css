@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+body {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+.home {
+  width: 100%;
+  height: 100vh;
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: background-image 1s ease-in-out;
+  font-family: "Nunito", sans-serif; /* Assurez-vous que la police est appliquée ici aussi */
+}
+
+.content1 {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  font-family: "Nunito", sans-serif; /* Application explicite de la police */
+}
+
+.content1 > h1 {
+  font-size: 3rem;
+  margin-top: 200px;
+  font-family: "Nunito", sans-serif; /* Assurez-vous que la police est appliquée ici aussi */
+}
+
+.content1 > p {
+  margin: auto;
+  margin-bottom: 25px;
+  font-size: 1.25rem;
+  width: 600px;
+  padding-left: 0px;
+  font-family: "Nunito", sans-serif; /* Application explicite de la police */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.buttons button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.buttons button:focus {
+  outline: none;
+}
+
+.buttons button svg {
+  color: white;
+}
+.button1{
+    margin-right: 92%;
+}
+.reservation{
+    height: 40px;
+    width: 200px;
+    padding: 7px;
+    margin:auto;
+    border: 1px solid #d65106;
+    color: white;
+    background-color: #d65106;
+    border-radius: 40px;
+}
+.reservation>a{
+    text-decoration: none;
+    color: white;
+}
+@media (max-width: 768px) {
+    .content > h1 {
+      font-size: 2rem; /* Taille du titre réduite sur petits écrans */
+      margin-top: 200px; /* Espacement ajusté */
+    }
+  
+    .content > p {
+      width: 80%; /* Réduit la largeur du paragraphe */
+      font-size: 1rem; /* Taille du texte réduite */
+    }
+  
+    .buttons {
+      flex-direction: row;
+      gap: 10px;
+    }
+  
+    .buttons button {
+      padding: 10px; /* Réduit la taille des boutons */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .content > h1 {
+      font-size: 1.5rem; /* Titre encore plus petit */
+      margin-top: 200px; /* Espacement ajusté pour petits écrans */
+    }
+  
+    .content > p {
+      width: 90%; /* Paragraphe presque plein écran */
+      font-size: 0.9rem; /* Taille du texte réduite */
+    }
+  
+    .buttons {
+      display: flex;
+      gap: 0px;
+    }
+  
+    .buttons button {
+      padding: 8px; /* Encore plus petit pour les boutons */
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 70px;
+      margin-top: 50px;
+      border-radius: 50%;
+      padding: 0px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  }

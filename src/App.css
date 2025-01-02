@@ -1,0 +1,254 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --light: #f6f6f9;
+    --primary: #1976D2;
+    --light-primary: #CFE8FF;
+    --grey: #eee;
+    --dark-grey: #AAAAAA;
+    --dark: #363949;
+    --darker: #fbfbfb;
+    --danger: #D32F2F;
+	--light-danger: #FECDD3;
+    --warning: #FBC02D;
+    --light-warning: #FFF2C6;
+    --success: #388E3C;
+    --light-success: #BBF7D0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.bx{
+    font-size: 1.7rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light: #181a1e;
+    --grey: #25252c;
+    --dark: #fbfbfb;
+    --darker: #25252c;
+
+}
+.theme-toggle{
+  display: block;
+  min-width: 50px;
+  height: 25px;
+  background: var(--grey);
+  cursor: pointer;
+  position: relative;
+  border-radius: 25px;
+}
+
+ .theme-toggle::before{
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  width: calc(25px - 4px);
+  background: var(--primary);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+ #theme-toggle:checked+.theme-toggle::before{
+  left: calc(100% - (25px - 4px) - 2px);
+}
+
+/* Add these styles to your Navbar.css */
+.nav-link {
+  color: white !important;
+  /* Make the text white */
+  font-weight: bold;
+  /* Make the text bold */
+}
+
+.nav-link:hover {
+  color: #f8f9fa !important;
+  /* Slightly lighter color on hover */
+  text-decoration: underline;
+  /* Optional: Add underline on hover */
+}
+
+/* Optional: Add styles for the navbar-brand text */
+.navbar-brand {
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Adjust the background color for better visibility when scrolling */
+.header.position-fixed {
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Slightly transparent black */
+  transition: background-color 0.3s ease;
+}
+
+.header.fixed-top {
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Slightly transparent black */
+
+  transition: background-color 0.3s ease;
+}
+
+.header {
+  width: 100%;
+  top: 0px;
+  left: 0;
+  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+.header::before {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(5px);
+  left: 0;
+  position: absolute;
+  content: '';
+  width: 100%;
+  z-index: -1;
+}
+
+.logo {
+  width: 130px;
+  box-shadow: none;
+}
+
+.header.sticky-top .logo {
+  filter: invert(1);
+  box-shadow: none;
+  transition: filter 0.3s ease;
+}
+/* From Uiverse.io by vinodjangid07 */ 
+.loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.truckWrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
+}
+/* truck upper body */
+.truckBody {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: motion 1s linear infinite;
+}
+/* truck suspension animation*/
+@keyframes motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* truck's tires */
+.truckTires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
+}
+.truckTires svg {
+  width: 24px;
+}
+
+.road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
+}
+.road::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 10px solid white;
+}
+.road::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 4px solid white;
+}
+
+.lampPost {
+  position: absolute;
+  bottom: 0;
+  right: -90%;
+  height: 90px;
+  animation: roadAnimation 1.4s linear infinite;
+}
+
+@keyframes roadAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+}
+.in-wishlist svg path{
+  fill: #ff0000;
+}
+
+.z-99999{
+  z-index: 99999;
+}
+.min-vh-80{
+  min-height: 80vh;
+
+}
