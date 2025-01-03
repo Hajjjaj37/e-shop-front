@@ -29,6 +29,7 @@ function App() {
         const data = await response.json();
         document.cookie = `role=${data.roles}; path=/; secure=true`;
         console.log(response);
+        dispatch({type: "SET_USER_ID", payload: data.id})
         dispatch({ type: "SET_ROLE", payload: data.roles })
       } else {
         console.error("Failed to fetch user role");

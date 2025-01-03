@@ -4,15 +4,12 @@ import "./Panier.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateCartQuantity } from "../../../store/reducer";
 import { getCookie } from "../../../utils/Cookies";
-import { Modal } from "bootstrap"; // Importing the Bootstrap Modal JavaScript
 
 function Panier() {
   const [cartlist, setCartlist] = useState([]);
   const [total, setTotal] = useState(0);
   const [token, setToken] = useState(null);
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [paymentError, setPaymentError] = useState(null);
-
+  const userid = useSelector((state)=> state.id)
   const dispatch = useDispatch();
 
   // Fetch cart data
@@ -50,36 +47,6 @@ function Panier() {
     dispatch(updateCartQuantity(id, quantity));
   };
 
-  // Initialize payment
-  const initializePayment = async () => {
-    setPaymentLoading(true);
-    setPaymentError(null);
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/payments/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Redirect to PayPal
-        window.location.href = data.data.approval_url;
-      } else {
-        setPaymentError(data.message || "Failed to initialize payment");
-      }
-    } catch (error) {
-      setPaymentError("An error occurred while processing your payment");
-      console.error("Payment error:", error);
-    } finally {
-      setPaymentLoading(false);
-    }
-  };
-
   // On component mount, fetch token and cart data
   useEffect(() => {
     const tokenFromAPI = getCookie("token");
@@ -90,6 +57,37 @@ function Panier() {
     fetchCartData();
   }, [token]);
 
+  const proceedToPayment = async () => {
+    if (!token) {
+      console.error("User is not authenticated");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/payment/process", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          user_id: userid, // Replace with the actual user ID
+          success_url: "http://localhost:3000/payment-success", // Replace with your success URL
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok && data.url) {
+        window.location.href = data.url; // Redirect to Stripe Checkout
+      } else {
+        console.error("Error in payment process:", data.error);
+      }
+    } catch (error) {
+      console.error("Payment process error:", error);
+    }
+  };
+  
   return (
     <div className="cart-wrapper">
       <div className="container">
@@ -171,30 +169,12 @@ function Panier() {
                 </div>
               </div>
 
-              <button
-                onClick={initializePayment}
-                className="btn btn-primary checkout-btn w-100 mb-3"
-                disabled={paymentLoading}
-              >
-                {paymentLoading ? (
-                  <span>
-                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Processing...
-                  </span>
-                ) : (
-                  "Pay with PayPal"
-                )}
-              </button>
-
-              {paymentError && (
-                <div className="alert alert-danger" role="alert">
-                  {paymentError}
-                </div>
-              )}
-
               <div className="d-flex justify-content-center gap-2">
                 <i className="bi bi-shield-check text-success"></i>
                 <small className="text-muted">Secure checkout</small>
+              </div>
+              <div>
+                <button onClick={proceedToPayment}> acheter</button>
               </div>
             </div>
           </div>
@@ -205,3 +185,4 @@ function Panier() {
 }
 
 export default Panier;
+

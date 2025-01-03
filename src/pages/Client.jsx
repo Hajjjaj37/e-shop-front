@@ -8,6 +8,7 @@ import Home from "../components/client/Home/Home";
 import Panier from "../components/client/Panier/Panier";
 import Produit from "../components/client/Produit/Produit";
 import Commandes from "../components/client/commandes/Commandes";
+import PaymentSuccess from "../components/client/payement/PaymentSuccess";
 
 export default function ClientWeb() {
     return (
@@ -21,6 +22,7 @@ export default function ClientWeb() {
               <Route path="/profile" element={<Profile />}/>
               <Route path="/panier" element={<Panier />}/>
               <Route path="/commandes" element={<Commandes />}/>
+              <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/wish" element={<Wishlist />}/>
           </Routes>
                   {/* <Footer /> */}

@@ -2,11 +2,21 @@ import React, { useEffect, useState } from "react";
 import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCookie } from '../../../utils/Cookies';
+import axios from "axios";
 
 const Profile = () => {
     const [token, setToken] = useState();
     const [user, setUser] = useState({});
-      
+    const [photo, setPhoto] = useState();
+    const [success, setSuccess] = useState();
+    const [editUser, setEditUser] = useState({
+      name: "",
+      email: "",
+      username: "",
+      phone: "",
+      image: photo
+    });
+
   
   const Afficher = async () => {
     const response = await fetch("http://127.0.0.1:8000/api/user", {
@@ -19,17 +29,59 @@ const Profile = () => {
     setUser(data);
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.put(
+          `http://localhost:8000/api/users/${user.id}`,
+          {
+            username: editUser.username,
+            email: editUser.email,
+            phone: editUser.phone,
+            image: photo,
+            name: editUser.name
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`, // Make sure `token` is correctly defined
+            }
+          }
+      );
+
+      if (response.status === 200) {
+        console.log("User updated successfully:", response.data);
+      }
+    } catch (error) {
+      console.error("Error updating user:", error.response?.data || error.message);
+    }
+  };
+
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.split(",")[1];
+        setPhoto(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
       useEffect(() => {
         Afficher();
         const tokenFromAPI = getCookie("token");
-        setToken(tokenFromAPI)
+        setToken(tokenFromAPI);
       }, [token]);
   return (
     <div className="min-vh-80 d-flex align-items-center top-0 start-0 w-100  justify-content-center">
       <div className="profile-cardprofil">
         {/* Image en haut */}
         <img
-          src={`http://localhost:8000/profil/${user.image}`}
+          src={`http://localhost:8000/storage/${user.image}`}
           alt="Profile"
           className="profile-photoprofil"
         />
@@ -65,7 +117,7 @@ const Profile = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                    Add New Information
+                    Editer Information
                   </h5>
                   <button
                     type="button"
@@ -75,74 +127,78 @@ const Profile = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <form>
+                  <form onSubmit={handleUpdate}>
                     {/* Champ 1 */}
                     <div className="mb-3">
                       <label
-                        htmlFor="recipient-name"
-                        className="col-form-label"
+                          htmlFor="recipient-name"
+                          className="col-form-label"
                       >
-                        Recipient:
+                        Name:
                       </label>
                       <input
-                        type="text"
-                        className="form-control"
-                        id="recipient-name"
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          onChange={e => setEditUser({...editUser, name: e.target.value})}
                       />
                     </div>
 
-                    
+                    <input type={"file"} name={"image"} onChange={handleFileChange} />
+
 
                     {/* Champ 3 */}
                     <div className="mb-3">
                       <label htmlFor="phone-number" className="col-form-label">
-                        Phone Number:
+                        Email:
                       </label>
                       <input
-                        type="tel"
-                        className="form-control"
-                        id="phone-number"
+                          type="tel"
+                          className="form-control"
+                          id="phone-number"
+                          onChange={e => setEditUser({...editUser, email: e.target.value})}
                       />
                     </div>
 
-                        
 
                     {/* Champ 5 */}
                     <div className="mb-3">
                       <label htmlFor="city" className="col-form-label">
-                        City:
+                        Phone:
                       </label>
                       <input
-                        type="text"
-                        className="form-control"
-                        id="city"
+                          type="text"
+                          className="form-control"
+                          id="city"
+                          onChange={e => setEditUser({...editUser, phone: e.target.value})}
                       />
                     </div>
 
                     {/* Champ 6 */}
                     <div className="mb-3">
                       <label htmlFor="occupation" className="col-form-label">
-                        Occupation:
+                        username:
                       </label>
                       <input
-                        type="text"
-                        className="form-control"
-                        id="occupation"
+                          type="text"
+                          className="form-control"
+                          id="occupation"
+                          onChange={e => setEditUser({...editUser, username: e.target.value})}
                       />
                     </div>
+                    <div className="modal-footer">
+                      <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" className="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
                   </form>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
-                  </button>
                 </div>
               </div>
             </div>

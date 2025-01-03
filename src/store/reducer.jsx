@@ -1,5 +1,6 @@
 const initialState = {
     role: "",
+    id : "",
     cart: JSON.parse(localStorage.getItem("cart")) || [],
     wishe: JSON.parse(localStorage.getItem("wishe")) || [],
 };
@@ -11,6 +12,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 role: action.payload,
             };
+        case "SET_USER_ID":
+            return {
+                ...state,
+                id: action.payload,
+            };
+        
         case "ADD_TO_CART": {
             const existingItemIndex = state.cart.findIndex(
                 (item) => item.id === action.payload.id
